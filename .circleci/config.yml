@@ -18,6 +18,10 @@ jobs:
       # - run: uudecode chromedriver_linux64.zip
       - run: sudo unzip chromedriver_linux64.zip chromedriver -d /usr/local/bin/
       - run: sudo chmod +x /usr/local/bin/chromedriver
+      - run: sudo apt-get install libxss1 libappindicator1 libindicator7
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo dpkg -i ./google-chrome*.deb
+      - run: sudo apt-get install -f google-chrome
       - run: chromedriver --version
       - run: google-chrome --version
       - run: mix local.hex --force
