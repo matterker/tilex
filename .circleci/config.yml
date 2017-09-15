@@ -9,6 +9,15 @@ jobs:
           POSTGRES_USER: postgres
     steps:
       - checkout
+      - run: export DISPLAY=:99.0
+      - run: sh -e /etc/init.d/xvfb start
+      - run: export CHROMEDRIVER_VERSION=`curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+      - run: curl -L -O "http://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+      - run: unzip chromedriver_linux64.zip
+      - run: sudo chmod +x chromedriver
+      - run: sudo mv chromedriver /usr/local/bin
+      - run: chromedriver --version
+      - run: google-chrome --version
       - run: mix local.hex --force
       - run: mix local.rebar --force
       - run: mix deps.get
