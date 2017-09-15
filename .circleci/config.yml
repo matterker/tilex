@@ -6,7 +6,7 @@ jobs:
       - image: circleci/elixir:1.5.1
       - image: postgres:9.6.5
         environment:
-          POSTGRES_USER: ubuntu
+          POSTGRES_USER: postgres
     steps:
       - checkout
       - run: mix local.hex --force
