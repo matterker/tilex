@@ -37,4 +37,6 @@ config :wallaby,
   chrome: [
     headless: true
   ],
-  screenshot_on_failure: true
+  screenshot_on_failure: true,
+  screenshot_dir: System.get_env("CIRCLE_ARTIFACTS") || "screenshots"
+
