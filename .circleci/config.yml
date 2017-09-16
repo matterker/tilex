@@ -5,11 +5,14 @@ jobs:
     docker:
       - image: circleci/elixir:1.5.1
       - image: postgres:9.6.5
-      - image: circleci/node:6.10
+      - image: circleci/node:7.7
         environment:
           POSTGRES_USER: postgres
     steps:
       - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
       # - run: export DISPLAY=:99.0
       # - run: sh -e /etc/init.d/xvfb start
       # - run: export CHROMEDRIVER_VERSION=`curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
