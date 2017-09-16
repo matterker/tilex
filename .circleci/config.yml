@@ -31,6 +31,8 @@ jobs:
       - run: mix deps.get
       - run: mix ecto.create
       - run: mix ecto.migrate
+      - run: node --version
+      - run: npm --version
       - run: npm install -g brunch
       - run: cd assets
       - run: npm install
