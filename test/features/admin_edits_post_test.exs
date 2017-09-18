@@ -20,8 +20,7 @@ defmodule AdminEditsPostTest do
 
     session
     |> sign_in(admin)
-    |> PostShowPage.navigate(post)
-    |> PostShowPage.click_edit()
+    |> visit(post_path(Endpoint, :edit, post))
 
     session
     |> PostForm.ensure_page_loaded()
