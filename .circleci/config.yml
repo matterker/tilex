@@ -44,8 +44,7 @@ jobs:
       - run: mix ecto.migrate
       - run: sudo npm install -g brunch
       - run: cd assets && npm install
-      - run: brunch build --production
-      - run: cd ..
+      - run: cd assets && brunch build --production
       - run: mix test
       - store_artifacts:
           path: /home/circleci/tilex/screenshots
