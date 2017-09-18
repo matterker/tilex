@@ -105,11 +105,13 @@ defmodule VisitorViewsPostTest do
                            body: body,
                            developer: developer)
 
-
     session
     |> visit(post_path(Endpoint, :show, post))
     |> find(Query.css(".post a.post__raw-link"))
     |> Element.click()
+
+    session
+    |> assert_has(Query.css("pre"))
 
     assert text(session) == String.trim("""
     #{title}
