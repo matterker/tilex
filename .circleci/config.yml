@@ -10,14 +10,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: update
+          command: sudo apt-get update
+      - run:
+          name: download-node
+          command: curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+      - run:
           name: install-node
           command: sudo apt-get install nodejs
       - run:
-          name: install-npm
-          command: sudo apt-get install npm
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
+          name: install-build-essentials
+          command: sudo apt-get install build-essential
       # - run: export DISPLAY=:99.0
       # - run: sh -e /etc/init.d/xvfb start
       # - run: export CHROMEDRIVER_VERSION=`curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
@@ -39,13 +42,9 @@ jobs:
       - run: mix deps.get
       - run: mix ecto.create
       - run: mix ecto.migrate
-      - run: nodejs --version
-      - run: npm --version
       - run: npm install -g brunch
-      - run: cd assets
-      - run: npm install
+      - run: npm install --prefix assets
       - run: brunch build --production
-      - run: cd ..
       - run: mix test
       - store_artifacts:
           path: /home/circleci/tilex/screenshots
