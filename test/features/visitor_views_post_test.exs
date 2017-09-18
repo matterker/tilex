@@ -110,8 +110,7 @@ defmodule VisitorViewsPostTest do
     |> find(Query.css(".post a.post__raw-link"))
     |> Element.click()
 
-    session
-    |> assert_has(Query.css("pre"))
+    assert current_path(session) == "/posts/#{post.slug}-a-special-post.md"
 
     assert text(session) == String.trim("""
     #{title}
