@@ -92,7 +92,7 @@ defmodule VisitorViewsPostTest do
     assert post.max_likes == 2
   end
 
-  test "clicks 'RAW' and sees raw markdown version", %{session: session} do
+  test "sees raw markdown version", %{session: session} do
     title = "A special post"
     body = """
     # title
@@ -106,11 +106,7 @@ defmodule VisitorViewsPostTest do
                            developer: developer)
 
     session
-    |> visit(post_path(Endpoint, :show, post))
-    |> find(Query.css(".post a.post__raw-link"))
-    |> Element.click()
-
-    assert current_path(session) == "/posts/#{post.slug}-a-special-post.md"
+    |> visit("#{post_path(Endpoint, :show, post)}.md")
 
     assert text(session) == String.trim("""
     #{title}
